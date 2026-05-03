@@ -3,7 +3,7 @@
 #include <ESP8266WebServer.h>
 #include <WiFiClient.h>
 #include <ArduinoOTA.h>
-#include <WebSocketsServer.h>
+#include <WebSocketsServer_Generic.h>
 #include <Hash.h>
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 
