@@ -5,9 +5,7 @@
 #include <ArduinoOTA.h>
 #include <WebSocketsServer.h>
 #include <Hash.h>
-
-#define SSID "XXX"
-#define PASSWORT "XXX"
+#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 
 WiFiClient client;
 int maxBuffer = 8192;
@@ -88,11 +86,15 @@ void setup() {
   Serial.begin(115200);
 
   // start wifi
-  WiFi.disconnect();
   WiFi.mode(WIFI_STA);
-  WiFi.begin(SSID, PASSWORT);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+  WiFiManager wm;
+  bool res = wm.autoConnect("BotvacAP");
+  if(!res) {
+        Serial.println("Failed to connect");
+        // ESP.restart();
+  } else {
+        //if you get here you have connected to the WiFi    
+        Serial.println("connected...yeey :)");
   }
 
   ArduinoOTA.setHostname("neato");
